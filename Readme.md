@@ -18,8 +18,14 @@
   Send a message to the worker.
 
 ```js
-worker.send({ string: 'hello' });
-worker.send({ string: 'world' });
+var upper = new Worker('uppercase.js');
+
+upper.on('message', function(msg){
+  console.log(msg.string);
+});
+
+upper.send({ string: 'hello' });
+upper.send({ string: 'world' });
 ```
 
 ### Worker#send(msg, callback)
@@ -28,12 +34,22 @@ worker.send({ string: 'world' });
   using the request/response paradigm you should pass the `e.data.id` property
   back with your response so that the correct callback may be invoked:
 
+worker:
+
 ```js
 onmessage = function(e) {
   setTimeout(function(){
-    postMessage({ id: e.data.id, value: e.data.value.toUpperCase() });
+    postMessage({ id: e.data.id, string: e.data.string.toUpperCase() });
   }, 500);
 };
+```
+
+client:
+
+```js
+upper.send({ string: 'hello' }, function(msg){
+  console.log(msg.string);
+});
 ```
 
 ### Worker#close()
