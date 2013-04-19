@@ -1,16 +1,17 @@
 {
-  "name": "worker",
-  "repo": "component/worker",
+  "name": "worker-component",
   "description": "Web worker API wrapper",
   "version": "0.0.1",
-  "keywords": ["worker"],
+  "keywords": [],
   "dependencies": {
-    "component/emitter": "*"
+    "emitter-component": "*"
   },
   "development": {},
   "license": "MIT",
   "main": "index.js",
-  "scripts": [
-    "index.js"
-  ]
+  "component": {
+    "scripts": {
+      "worker/index.js": "index.js"
+    }
+  }
 }
