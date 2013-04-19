@@ -7,20 +7,6 @@
 
     $ component install component/worker
 
-## Example
-
-```js
-var Worker = require('worker');
-var worker = new Worker('work.js');
-
-worker.on('message', function(msg, e){
-  if (!msg.progress) return worker.off('message');
-  console.log(msg.progress);
-});
-
-worker.send({ id: 1 });
-```
-
 ## API
 
 ### Worker(script)
