@@ -1,0 +1,35 @@
+<html>
+<head>
+  <title>Worker</title>
+</head>
+<body>
+  <script src="build/build.js"></script>
+  <script>
+    // streaming
+    (function(){
+      var Worker = require('worker');
+      var worker = new Worker('workers/progress.js');
+
+      worker.on('message', function(msg, e){
+        if (!msg.progress) return worker.off('message');
+        console.log(msg.progress);
+      });
+
+      worker.send({ id: 1 });
+    });
+
+    // request response
+    (function(){
+      var Worker = require('worker');
+      var uppercase = new Worker('workers/callback.js');
+
+      uppercase.send({ value: 'hello' }, function(res){
+        console.log(res.value);
+        uppercase.send({ value: 'world' }, function(res){
+          console.log(res.value);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
