@@ -13,7 +13,7 @@
 
   Initialize a worker with the given `script`.
 
-### Worker#send(msg)
+### Worker#send(msg, [transferables])
 
   Send a message to the worker.
 
