@@ -80,16 +80,17 @@ Worker.prototype.send = function(msg, fn){
  *
  * @param {Mixed} msg
  * @param {Function} fn
+ * @param {Array} [transferables]
  * @api public
  */
 
-Worker.prototype.request = function(msg, fn){
+Worker.prototype.request = function(msg, fn, transferables){
   var self = this;
   var id = ++this.ids;
 
   // req
   msg.id = id;
-  this.worker.postMessage(msg);
+  this.worker.postMessage(msg, transferables);
 
   // rep
   this.on('message', onmessage);
