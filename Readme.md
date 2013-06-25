@@ -28,7 +28,7 @@ upper.send({ string: 'hello' });
 upper.send({ string: 'world' });
 ```
 
-### Worker#send(msg, callback)
+### Worker#send(msg, callback[, transferables])
 
   Send a request message to the worker with the given `callback`. When
   using the request/response paradigm you should pass the `e.data.id` property
