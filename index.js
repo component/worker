@@ -63,16 +63,18 @@ Worker.prototype.close = function(){
 /**
  * Send a `msg` with optional callback `fn`.
  *
- * TODO: allow passing of transferrables
- *
  * @param {Mixed} msg
+ * @param {Function|Array} [fn or transferrables]
  * @param {Function} [fn]
  * @api public
  */
 
-Worker.prototype.send = function(msg, fn){
-  if (fn) this.request(msg, fn);
-  this.worker.postMessage(msg);
+Worker.prototype.send = function(msg, a, b){
+  if ('function' == typeof a) {
+    return this.request(msg, a, b);
+  }
+
+  this.worker.postMessage(msg, a);
 };
 
 /**
